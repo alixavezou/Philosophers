@@ -6,7 +6,7 @@
 /*   By: aavezou <aavezou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:48:39 by aavezou           #+#    #+#             */
-/*   Updated: 2023/01/31 18:34:35 by aavezou          ###   ########.fr       */
+/*   Updated: 2023/01/31 18:56:38 by aavezou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ struct	s_philo
 	int	time_to_sleep;
 	int	right_fork;
 	int	left_fork;
-	int dining_room;
+	
+	int *dining_room;
 };
 
 // Define values
