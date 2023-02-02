@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aavezou <aavezou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alixavezou <alixavezou@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:48:39 by aavezou           #+#    #+#             */
-/*   Updated: 2023/01/31 18:56:38 by aavezou          ###   ########.fr       */
+/*   Updated: 2023/02/01 18:49:39 by alixavezou       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,27 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <ctype.h>
+# include <pthread.h>
 
-typedef struct s_philo t_philo;
-struct	s_philo
+typedef struct s_general t_general;
+struct	s_general
 {
-	//si 1 philo n'a pas commence a manger time_to_die msc 
-   //apres le debut de son precedent repas ou depuis le debut de sa simulation alors il meurt
+	//si 1 philo n'a pas commence a manger time_to_die msc
+	//apres le debut de son precedent repas ou depuis le debut de sa simulation alors il meurt
 	int	number_of_philosophers;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	right_fork;
-	int	left_fork;
-	
-	int *dining_room;
+	int	number_of_philosophers_must_eat;
+
+	pthread_mutex_t	*forks;
+};
+
+typedef struct s_philo t_philo;
+struct	s_philo
+{
+	int	id_philo;
+
 };
 
 // Define values
@@ -40,8 +47,10 @@ struct	s_philo
 # define INT_MIN -2147483648
 
 int		ft_atoi(const char *str);
-int		ft_allocate_dining_room(t_philo *philo);
+int		ft_allocate_dining_room(t_general *general);
+int		ft_allocate_forks_tab(t_general *general);
+int		ft_init_philo(t_philo *philo, t_general *general);
 
-void	ft_initialize_values(t_philo *philo, char **av);
+void	ft_initialize_values(t_general *general, char **av);
 
 #endif
